@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Submit</title>
+    <link href="~/Content/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo.material.min.css" rel="stylesheet" />
+
+    <script src="~/scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/scripts/kendo/kendo.all.min.js"></script>
+</head>
+<body>
+    <div> 
+        <h4>Uploaded files</h4>
+
+        @if (TempData.ContainsKey("UploadedFiles")) { 
+        <div class="t-widget t-upload">
+            <ul class="t-upload-files t-reset">
+                @foreach (var attachment in (IEnumerable<string>)TempData["UploadedFiles"])
+                    { 
+                    <li class="t-file"><span class="t-icon t-success"></span>@attachment</li>
+                    }
+            </ul>
+        </div>
+        }
+        else
+        {
+
+        }
+
+        <p style="margin-top: 1em;">
+            <a href='@Url.Action("Index", "FaceService")' class="k-button k-primary">Go back</a>
+        </p>
+    </div>
+</body>
+</html>
