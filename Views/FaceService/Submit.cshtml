@@ -16,27 +16,34 @@
     <script src="~/scripts/kendo/kendo.all.min.js"></script>
 </head>
 <body>
-    <div> 
+    <div>
         <h4>Uploaded files</h4>
-
-        @if (TempData.ContainsKey("UploadedFiles")) { 
-        <div class="t-widget t-upload">
-            <ul class="t-upload-files t-reset">
-                @foreach (var attachment in (IEnumerable<string>)TempData["UploadedFiles"])
-                    { 
-                    <li class="t-file"><span class="t-icon t-success"></span>@attachment</li>
-                    }
-            </ul>
-        </div>
+        @if (ViewBag.NullFile)
+        {
+            <h1>未選擇檔案</h1>
+        }
+        else if (ViewBag.WrongFileType)
+        {
+            <h1>檔案格式非jpg</h1>
         }
         else
         {
-
+            <img src="data:image/jpg;base64, @ViewBag.Image" />
+            <h4>@ViewBag.Image</h4>
         }
 
         <p style="margin-top: 1em;">
-            <a href='@Url.Action("Index", "FaceService")' class="k-button k-primary">Go back</a>
+            @*<a href='@Url.Action("Index", "FaceService")' class="k-button k-primary">Go back</a>*@
+            <button onclick="closeWindow()">Close</button>
         </p>
     </div>
+
+    <script>
+        function closeWindow() {
+            if (confirm("Close Window?")) {
+                close();
+            }
+        }
+    </script>
 </body>
 </html>

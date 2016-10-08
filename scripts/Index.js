@@ -3,6 +3,4 @@
     $("#files").kendoUpload({
         multiple: false
     });
-
-    
 });
