@@ -35,7 +35,7 @@
             <img id="faceImage" src="data:image/jpg;base64,@ViewBag.FaceImage" /><br />
             <button id="actionBtn" onclick="action()" class="k-button k-primary">添加臉部參考</button>
             <input type="text" id="userNameText" value="@ViewBag.UserNameLabel" />
-            @Html.DropDownList("Gender", (List<SelectListItem>)ViewBag.GenderCode, new { @id = "Gender" })
+            @Html.DropDownList("Gender", (List<SelectListItem>)ViewBag.GenderCode, new { @id = "gender" })
             <button id="submit" onclick="submit()" class="k-button k-primary">新增</button><br />
             <img src="data:image/jpg;base64, @ViewBag.Image" />
         }
@@ -81,14 +81,14 @@
                 url: "/FaceService/AddPersonImage",
                 data: {
                     userName: $("#userNameText").val(),
-                    gender: $("#Gender").val(),
+                    gender: $("#gender").val(),
                     base64Image: data
                 },
                 dataType: "json",
                 success: function (response) {
                     if (response.success) {
                         alert("新增成功!");
-
+                        window.location.replace("/FaceService/ManagementPage");
                     }
                     else {
                         alert(response.message);
