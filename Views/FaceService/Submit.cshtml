@@ -11,7 +11,9 @@
     <title>Submit</title>
     <link href="~/Content/kendo.common-material.min.css" rel="stylesheet" />
     <link href="~/Content/kendo.material.min.css" rel="stylesheet" />
-    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link href="~/styles/submit.css" rel="stylesheet"/>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"/>
+
 
     <script src="~/scripts/jquery-3.1.0.min.js"></script>
     <script src="~/scripts/jquery-ui-1.12.1.min.js"></script>
@@ -31,18 +33,53 @@
         }
         else
         {
-            <h1>辨識結果 : @ViewBag.UserNameLabel</h1>
-            <img id="faceImage" src="data:image/jpg;base64,@ViewBag.FaceImage" /><br />
-            <button id="actionBtn" onclick="action()" class="k-button k-primary">添加臉部參考</button>
-            <input type="text" id="userNameText" value="@ViewBag.UserNameLabel" />
-            @Html.DropDownList("Gender", (List<SelectListItem>)ViewBag.GenderCode, new { @id = "gender" })
-            <button id="submit" onclick="submit()" class="k-button k-primary">新增</button><br />
-            <img src="data:image/jpg;base64, @ViewBag.Image" />
+
+            <div id="pricing-table" class="clear">
+                <div class="plan" id="most-popular">
+                    <h3>辨識結果<br><span><img id="faceImage" class="face" src="data:image/jpg;base64,@ViewBag.FaceImage" /></span></h3>
+                    @*<a class="signup" href="">Sign up</a>*@
+                    
+                    <ul>
+                        <li><b>Name : </b> @ViewBag.UserName</li>
+                        <li><b>Gender : </b> @ViewBag.UserGender</li>
+                        <li><b>Birth Date : </b> @ViewBag.UserBirthDate</li>
+                        <li><b>Tag : </b> @ViewBag.UserTag</li>
+                        <li><button id="actionBtn" onclick="action()" class="k-button k-primary">添加臉部參考</button></li>
+                        <li><input type="text" id="userNameText" value="@ViewBag.UserNameLabel" /></li>
+                        <li>@Html.DropDownList("Gender", (List<SelectListItem>)ViewBag.GenderCode, new { @id = "gender" })</li>
+                        <li><button id="submit" onclick="submit()" class="k-button k-primary">新增</button><br /></li>
+                    </ul>
+                    <button onclick="closeWindow()" class="k-button k-primary signup">Close</button>
+                </div>
+            </div>
+
+            @*<table style="width:auto">
+                <tr>
+                    <th>原始圖片</th>
+                    <th>臉部圖片</th>
+                    <th>辨識結果</th>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="data:image/jpg;base64, @ViewBag.Image" />
+                    </td>
+                    <td>
+                        <img id="faceImage" src="data:image/jpg;base64,@ViewBag.FaceImage" /><br />
+                        <button id="actionBtn" onclick="action()" class="k-button k-primary">添加臉部參考</button>
+                        <input type="text" id="userNameText" value="@ViewBag.UserNameLabel" />
+                        @Html.DropDownList("Gender", (List<SelectListItem>)ViewBag.GenderCode, new { @id = "gender" })
+                        <button id="submit" onclick="submit()" class="k-button k-primary">新增</button><br />
+                    </td>
+                    <td>                        
+                        <h1>@ViewBag.UserNameLabel</h1>
+                    </td>
+                </tr>
+            </table>*@       
         }
 
         <p style="margin-top: 1em;">
             @*<a href='@Url.Action("Index", "FaceService")' class="k-button k-primary">Go back</a>*@
-            <button onclick="closeWindow()" class="k-button k-primary">Close</button>
+            @*<button onclick="closeWindow()" class="k-button k-primary">Close</button>*@
         </p>
     </div>
 
@@ -60,9 +97,9 @@
 
         function action() {
             $("#actionBtn").hide();
-            $("#userNameText").show();
-            $("#submit").show();
-            $("#gender").show();
+            $("#userNameText").show("slow");
+            $("#submit").show("slow");
+            $("#gender").show("slow");
         }
 
         function closeWindow() {
