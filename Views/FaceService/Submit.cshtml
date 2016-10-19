@@ -22,28 +22,33 @@
 </head>
 <body>
     <div>
-        <h4>Uploaded Result</h4>
         @if (ViewBag.NullFile)
         {
-            <h1>未選擇檔案</h1>
+            <h1 style="color:white">未選擇檔案</h1>
+            <button onclick="closeWindow()" class="k-button k-primary signup">Close</button>
         }
         else if (ViewBag.WrongFileType)
         {
-            <h1>檔案格式非jpg</h1>
+            <h1 style="color:white">檔案格式非jpg</h1>
+            <button onclick="closeWindow()" class="k-button k-primary signup">Close</button>
         }
         else
         {
 
             <div id="pricing-table" class="clear">
                 <div class="plan" id="most-popular">
-                    <h3>辨識結果<br><span><img id="faceImage" class="face" src="data:image/jpg;base64,@ViewBag.FaceImage" /></span></h3>
+                    <h3>@ViewBag.Title<br><span><img id="faceImage" class="face" src="data:image/jpg;base64,@ViewBag.FaceImage" /></span></h3>
                     @*<a class="signup" href="">Sign up</a>*@
                     
                     <ul>
-                        <li><b>Name : </b> @ViewBag.UserName</li>
-                        <li><b>Gender : </b> @ViewBag.UserGender</li>
-                        <li><b>Birth Date : </b> @ViewBag.UserBirthDate</li>
-                        <li><b>Tag : </b> @ViewBag.UserTag</li>
+                        @if (ViewBag.Recognize)
+                        {
+                            <li><b>Name : </b> @ViewBag.UserName</li>
+                            <li><b>Gender : </b> @ViewBag.UserGender</li>
+                            <li><b>Birth Date : </b> @ViewBag.UserBirthDate</li>
+                            <li><b>Tag : </b> @ViewBag.UserTag</li>
+                        }
+                        
                         <li><button id="actionBtn" onclick="action()" class="k-button k-primary">添加臉部參考</button></li>
                         <li><input type="text" id="userNameText" value="@ViewBag.UserNameLabel" /></li>
                         <li>@Html.DropDownList("Gender", (List<SelectListItem>)ViewBag.GenderCode, new { @id = "gender" })</li>
